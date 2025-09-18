@@ -1,11 +1,16 @@
 extends CharacterBody3D
 
-
+@export var max_hitpoints := 100
 const SPEED = 5.0
 @export var jump_height: float = 1.0
 var mouse_motion := Vector2.ZERO
 @onready var camera_pivot = $CameraPivot
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var hitpoints: int = max_hitpoints:
+	set(value) :
+		hitpoints = value
+		if hitpoints <= 0:
+			get_tree().quit()
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
